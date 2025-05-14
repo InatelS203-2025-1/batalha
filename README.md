@@ -69,7 +69,7 @@ Este projeto segue os princípios de **Arquitetura Orientada a Serviços (SOA)**
 git clone
 
 # 2. Navegue até o diretório do projeto
-cd nome-do-repositorio
+cd batalha
 
 # 3. Compile o projeto
 mvn clean install
