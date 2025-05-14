@@ -1,10 +1,65 @@
-# Grupo 1 - Batalha
-> Integrantes: Ana Júlia Pinto, Leonardo dos Santos Ferreira, Rodrigo Armengol de Oliveira
+# ⚔️ Sistema de Batalha 
 
-Responsável por realizar um combate entre os Pokémons dos jogadores. Recebe a requisição da aplicação de gestão de partidas. A batalha deve usar probabilidades considerando os tipos de cada Pokémon. Os jogadores revesam na escolha de qual será o Pokémon utilizado. O Pokémon vencedor permanece no campo para uma nova rodada. Vence a batalha o jogador que vencer o maior número de rodadas entre as 5 rodadas. O resultado da partida deve ser retornado para a aplicação de gestão de partidas.
+Bem-vindo ao **Sistema de Batalha**! Este projeto é responsável por gerenciar as batalhas entre os Pokémons dos jogadores, utilizando regras específicas de combate, turnos e probabilidades com base nos tipos dos Pokémons.  
+Desenvolvido com **Java + Spring Boot** utilizando a arquitetura **MVC**.  
+Este projeto **consome APIs** externas para autenticação, distribuição de cartas e gestão de partidas.
 
-## Diagrama de Caso de Uso
-![Diagrama de uso7 drawio](https://github.com/user-attachments/assets/50375cd9-e642-4ab0-b390-9e094078dc00)
+---
 
-## Diagrama de Classe
-![DC-V4](https://github.com/user-attachments/assets/f228ca4e-852e-4612-945c-0517e8149227)
+## 📦 Tecnologias Utilizadas
+
+- ☕ Java 17+
+- 🌱 Spring Boot
+- 🧪 JUnit (para testes)
+- 🔗 Consumo de APIs REST
+- 🧰 Maven (gerenciamento de dependências)
+
+---
+
+## 🧠 Funcionalidades
+
+- 🎮 Realiza batalhas entre dois jogadores com até 5 rodadas.
+- 🔁 Alternância entre jogadores por rodada.
+- 🧮 Cálculo de dano baseado no tipo do Pokémon e nas regras específicas do jogo.
+- 🏆 Determina o vencedor com base no maior número de rodadas ganhas.
+- 📤 Retorna o resultado da partida para o sistema de gestão de partidas.
+
+---
+
+## 🧱 Arquitetura - MVC
+
+A aplicação segue o padrão arquitetural **MVC**:
+
+- **Model**:  
+  Representa os dados do domínio, como `Pokemon`, `Ataque`, `Tipo`, `Rodada`, entre outros.
+
+- **Controller**:  
+  Responsável por receber as requisições da aplicação cliente, como iniciar uma batalha, registrar uma ação, etc.
+
+- **View (Regras de Jogo)**:  
+  Implementa a lógica da batalha, como cálculo de dano, verificação de tipos, regras por rodada, entre outros.
+
+---
+
+## 🚀 Como executar o projeto localmente
+
+### Pré-requisitos
+
+- Java 17+
+- Maven 3.8+
+- IDE de sua preferência (IntelliJ, Eclipse, VS Code...)
+
+### Passos para rodar o projeto:
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/nome-do-repositorio.git
+
+# 2. Navegue até o diretório do projeto
+cd nome-do-repositorio
+
+# 3. Compile o projeto
+mvn clean install
+
+# 4. Rode a aplicação
+mvn spring-boot:run
