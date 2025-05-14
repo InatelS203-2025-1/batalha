@@ -53,7 +53,7 @@ A aplicação segue o padrão arquitetural **MVC**:
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone
 
 # 2. Navegue até o diretório do projeto
 cd nome-do-repositorio
