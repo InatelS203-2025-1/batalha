@@ -1,8 +1,7 @@
-# ⚔️ Sistema de Batalha 
+# ⚔️ Sistema de Batalha
 
 Bem-vindo ao **Sistema de Batalha**! Este projeto é responsável por gerenciar as batalhas entre os Pokémons dos jogadores, utilizando regras específicas de combate, turnos e probabilidades com base nos tipos dos Pokémons.  
-Desenvolvido com **Java + Spring Boot** utilizando a arquitetura **MVC**.  
-Este projeto **consome APIs** externas para autenticação, distribuição de cartas e gestão de partidas.
+Desenvolvido com **Java + Spring Boot** utilizando a arquitetura **MVC** e **SOA**.
 
 ---
 
@@ -38,6 +37,20 @@ A aplicação segue o padrão arquitetural **MVC**:
 
 - **View (Regras de Jogo)**:  
   Implementa a lógica da batalha, como cálculo de dano, verificação de tipos, regras por rodada, entre outros.
+
+---
+
+## 🧩 Integração com SOA
+
+Este projeto segue os princípios de **Arquitetura Orientada a Serviços (SOA)**, onde a aplicação atua como **consumidora de serviços externos** e também fornece **dados para outros módulos** do sistema.
+
+- 🔐 **Autenticação**: Consome o serviço de autenticação para validar os jogadores.
+- 🎴 **Distribuição de cartas**: Obtém os Pokémons disponíveis de outro serviço.
+- 🎯 **Criação e gestão de partidas**: Se comunica com o sistema de gerenciamento de partidas.
+- 🗂️ **Histórico de batalhas**:  
+  Ao final de cada partida, os dados do confronto (vencedor, rodadas, pokémons usados, etc.) são armazenados e expostos para **outros serviços** consumirem (ex: estatísticas, ranking, perfil do jogador).
+
+> Isso promove um sistema desacoplado e reutilizável, onde cada aplicação desempenha um papel específico e se comunica através de **APIs bem definidas**.
 
 ---
 
