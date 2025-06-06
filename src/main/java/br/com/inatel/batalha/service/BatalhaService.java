@@ -4,7 +4,7 @@ import br.com.inatel.batalha.model.Jogador;
 
 public class BatalhaService {
     public void iniciarBatalha(Jogador jogador1, Jogador jogador2) {
-        System.out.println("Iniciando batalha entre " + jogador1.getNome() + " e " + jogador2.getNome());
+       // System.out.println("Iniciando batalha entre " + jogador1.getNome() + " e " + jogador2.getNome());
         
         // Lógica de batalha aqui
         // Exemplo: escolher Pokémon, atacar, etc.
@@ -28,4 +28,6 @@ public class BatalhaService {
         // Lógica para registrar o resultado em um banco de dados ou arquivo
         // Enviar para API externa via REST (SOA)
     }
+
+
 }

@@ -1,0 +1,4 @@
+br\com\inatel\batalha\model\Participante.class
+br\com\inatel\batalha\model\Pokemon.class
+br\com\inatel\batalha\model\Batalha.class
+br\com\inatel\batalha\model\Jogador.class
