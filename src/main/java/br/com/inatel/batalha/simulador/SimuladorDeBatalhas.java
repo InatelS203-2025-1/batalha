@@ -1,4 +1,4 @@
-package br.com.inatel.batalha.simulador;
+/*package br.com.inatel.batalha.simulador;
 
 import java.util.Scanner;
 import java.util.Random;
@@ -40,4 +40,4 @@ public class SimuladorDeBatalhas {
         Batalha batalha = new Batalha();
         batalha.iniciar(jogador, inimigo);
     }
-}
+}*/

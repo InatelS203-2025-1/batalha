@@ -1,15 +1,16 @@
 package br.com.inatel.batalha.factory;
 
+import br.com.inatel.batalha.dto.PokemonDTO;
 import br.com.inatel.batalha.model.Pokemon;
-import br.com.inatel.batalha.strategy.*;
 
 public class PokemonFactory {
-    public static Pokemon criar(String nome) {
-        return switch (nome.toLowerCase()) {
-            case "pikachu" -> new Pokemon("Pikachu", "elétrico", 80, 25, new AtaqueRapido());
-            case "charmander" -> new Pokemon("Charmander", "fogo", 100, 30, new AtaqueForte());
-            case "bulbasaur" -> new Pokemon("Bulbasaur", "grama", 90, 20, new AtaqueNormal());
-            default -> throw new IllegalArgumentException("Pokémon desconhecido");
-        };
+
+    public static Pokemon converter(PokemonDTO dto) {
+        Pokemon pokemon = new Pokemon();
+        pokemon.setNome(dto.getName());
+        pokemon.setTipo(dto.getTypes().get(0).getType().getName()); // Primeiro tipo
+        pokemon.setHp(dto.getStats().get(0).getBase_stat());         // HP
+        pokemon.setAtaque(dto.getStats().get(1).getBase_stat());     // Ataque
+        return pokemon;
     }
 }
