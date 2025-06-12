@@ -10,8 +10,8 @@ public class StatSlot {
     private int effort;
     private InnerStat stat;
 
-    @Setter
     @Getter
+    @Setter
     public static class InnerStat {
         private String name;
     }

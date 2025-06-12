@@ -24,7 +24,7 @@ public class TerminalMenu {
             System.out.print("Escolha uma opção: ");
 
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // consumir quebra de linha
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:

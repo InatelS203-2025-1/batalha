@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-// 🔽 IMPORTS NECESSÁRIOS
-import br.com.inatel.batalha.dto.TypeSlot;
-import br.com.inatel.batalha.dto.StatSlot;
 
 @Getter
 @Setter
