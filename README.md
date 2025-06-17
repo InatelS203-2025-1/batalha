@@ -19,13 +19,13 @@ Desenvolvido com **Java + Spring Boot** utilizando a arquitetura **MVC** e **SOA
 
 - 🎮 Realiza batalhas entre dois jogadores com até 5 rodadas.
 - 🔁 Alternância entre jogadores por rodada.
-- 🧮 Cálculo de dano baseado no tipo do Pokémon e nas regras específicas do jogo.
+- 🧮 Cálculo de dano baseado no tipo de ataque do Pokémon e nas regras específicas do jogo.
 - 🏆 A batalha é conduzida em turnos com ataques, defesas e cálculo de dano.
 - 📤 Um histórico das batalhas é registrado localmente.
 
 ---
 
-## 🧱 Arquitetura - MVC
+## 🧱 Arquitetura - MVC (Model-View-Controller)
 
 A aplicação segue o padrão arquitetural **MVC**:
 
