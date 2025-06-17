@@ -54,6 +54,16 @@ Este projeto segue os princípios de **Arquitetura Orientada a Serviços (SOA)**
 
 ---
 
+## 🛠️ Design Patterns Aplicados
+
+| Padrão         | Onde foi aplicado                                          | Finalidade                                                                       |
+| -------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Strategy       | Classes de ataque: AtaqueForte, AtaqueNormal, AtaqueRapido | Permite definir diferentes comportamentos de ataque de forma dinâmica            |
+| Factory Method | Classe PokemonFactory                                      | Facilita a criação de Pokémons com configurações pré-definidas                   |
+| Adapter        | Classe PokedexAdapter (simulada)                           | Adapta dados de uma fonte externa (ex: Pokédex) para o modelo interno do sistema |
+
+---
+
 ## 🚀 Como executar o projeto localmente
 
 ### Pré-requisitos
