@@ -7,6 +7,7 @@ import br.com.inatel.batalha.model.Batalha;
 import br.com.inatel.batalha.model.Jogador;
 import br.com.inatel.batalha.model.Pokemon;
 import br.com.inatel.batalha.model.ResultadoBatalha;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -59,15 +60,21 @@ public class BatalhaService {
         }
     }
 
+    @PostConstruct
     public void carregarHistoricoDoArquivo() {
-        try (Reader reader = new FileReader(ARQUIVO_HISTORICO)) {
+        InputStream input = getClass().getClassLoader().getResourceAsStream(ARQUIVO_HISTORICO);
+        if (input == null) {
+            System.out.println("Arquivo de histórico não encontrado, iniciando com histórico vazio.");
+            return;
+        }
+        try (Reader reader = new InputStreamReader(input)) {
             Type listaTipo = new TypeToken<ArrayList<ResultadoBatalha>>(){}.getType();
             List<ResultadoBatalha> lista = gson.fromJson(reader, listaTipo);
             if (lista != null) {
                 historicoBatalhas.clear();
                 historicoBatalhas.addAll(lista);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Erro ao carregar histórico: " + e.getMessage());
         }
     }
