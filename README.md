@@ -20,8 +20,8 @@ Desenvolvido com **Java + Spring Boot** utilizando a arquitetura **MVC** e **SOA
 - 🎮 Realiza batalhas entre dois jogadores com até 5 rodadas.
 - 🔁 Alternância entre jogadores por rodada.
 - 🧮 Cálculo de dano baseado no tipo do Pokémon e nas regras específicas do jogo.
-- 🏆 Determina o vencedor com base no maior número de rodadas ganhas.
-- 📤 Retorna o resultado da partida para o sistema de gestão de partidas.
+- 🏆 A batalha é conduzida em turnos com ataques, defesas e cálculo de dano.
+- 📤 Um histórico das batalhas é registrado localmente.
 
 ---
 
@@ -36,7 +36,7 @@ A aplicação segue o padrão arquitetural **MVC**:
   Responsável por receber as requisições da aplicação cliente, como iniciar uma batalha, registrar uma ação, etc.
 
 - **View (Regras de Jogo)**:  
-  Implementa a lógica da batalha, como cálculo de dano, verificação de tipos, regras por rodada, entre outros.
+ Como o projeto é console-based no momento, a interação ocorre via terminal.
 
 ---
 
@@ -44,11 +44,14 @@ A aplicação segue o padrão arquitetural **MVC**:
 
 Este projeto segue os princípios de **Arquitetura Orientada a Serviços (SOA)**, onde a aplicação atua como **consumidora de serviços externos** e também fornece **dados para outros módulos** do sistema.
 
-- 🔐 **Autenticação**: Consome o serviço de autenticação para validar os jogadores.
-- 🎴 **Distribuição de cartas**: Obtém os Pokémons disponíveis de outro serviço.
-- 🎯 **Criação e gestão de partidas**: Se comunica com o sistema de gerenciamento de partidas.
-- 🗂️ **Histórico de batalhas**:  
-  Ao final de cada partida, os dados do confronto (vencedor, rodadas, pokémons usados, etc.) são armazenados e expostos para **outros serviços** consumirem (ex: estatísticas, ranking, perfil do jogador).
+✅ 1. Serviço Externo Consumido:
+📡 Consulta à Pokédex:
+- Ao escolher um Pokémon, o sistema consulta a API da Pokédex e adapta os dados recebidos para a classe interna Pokemon através da PokedexAdapter.
+
+✅ 2. Exposição de Serviço Interno: Histórico de Batalhas
+- Ao final de cada batalha, o resultado é salvo localmente (atualmente em arquivo .txt e planejado para ser armazenado no banco de dados PostgreSQL).
+
+- Esse histórico será futuramente acessível por outros módulos do sistema ou clientes externos por meio de uma API REST.
 
 > Isso promove um sistema desacoplado e reutilizável, onde cada aplicação desempenha um papel específico e se comunica através de **APIs bem definidas**.
 
