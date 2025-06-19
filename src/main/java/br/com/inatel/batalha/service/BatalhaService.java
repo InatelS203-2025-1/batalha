@@ -7,26 +7,48 @@ import br.com.inatel.batalha.model.Batalha;
 import br.com.inatel.batalha.model.Jogador;
 import br.com.inatel.batalha.model.Pokemon;
 import br.com.inatel.batalha.model.ResultadoBatalha;
-import jakarta.annotation.PostConstruct;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 @Service
 public class BatalhaService {
 
     private final PokeApiClient pokeApiClient;
-
-    // Histórico simples em memória
     private final List<ResultadoBatalha> historicoBatalhas = new ArrayList<>();
-    private static final String ARQUIVO_HISTORICO = "historico_batalhas.json";
-    private final Gson gson = new Gson();
+
+    private static final String ARQUIVO_HISTORICO = System.getProperty("user.dir") + File.separator + "historico_batalhas.json";
+
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new TypeAdapter<LocalDateTime>() {
+                private final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+                @Override
+                public void write(JsonWriter out, LocalDateTime value) throws IOException {
+                    out.value(value.format(formatter));
+                }
+
+                @Override
+                public LocalDateTime read(JsonReader in) throws IOException {
+                    return LocalDateTime.parse(in.nextString(), formatter);
+                }
+            })
+            .setPrettyPrinting()
+            .create();
 
     public BatalhaService(PokeApiClient pokeApiClient) {
         this.pokeApiClient = pokeApiClient;
@@ -53,36 +75,48 @@ public class BatalhaService {
     }
 
     private void salvarHistoricoNoArquivo() {
-        try (Writer writer = new FileWriter(ARQUIVO_HISTORICO)) {
-            gson.toJson(historicoBatalhas, writer);
+        try {
+            File file = new File(ARQUIVO_HISTORICO);
+            System.out.println("Salvando histórico em: " + file.getAbsolutePath());
+
+            try (Writer writer = new FileWriter(file)) {
+                gson.toJson(historicoBatalhas, writer);
+            }
         } catch (IOException e) {
             System.out.println("Erro ao salvar histórico: " + e.getMessage());
         }
     }
 
-    @PostConstruct
-    public void carregarHistoricoDoArquivo() {
-        InputStream input = getClass().getClassLoader().getResourceAsStream(ARQUIVO_HISTORICO);
-        if (input == null) {
+    private void carregarHistoricoDoArquivo() {
+        File file = new File(ARQUIVO_HISTORICO);
+
+        if (!file.exists()) {
             System.out.println("Arquivo de histórico não encontrado, iniciando com histórico vazio.");
             return;
         }
-        try (Reader reader = new InputStreamReader(input)) {
-            Type listaTipo = new TypeToken<ArrayList<ResultadoBatalha>>(){}.getType();
+
+        try (Reader reader = new FileReader(file)) {
+            Type listaTipo = new TypeToken<ArrayList<ResultadoBatalha>>() {}.getType();
             List<ResultadoBatalha> lista = gson.fromJson(reader, listaTipo);
             if (lista != null) {
                 historicoBatalhas.clear();
                 historicoBatalhas.addAll(lista);
+                System.out.println("Histórico carregado com sucesso.");
             }
         } catch (Exception e) {
             System.out.println("Erro ao carregar histórico: " + e.getMessage());
         }
     }
 
+    public List<ResultadoBatalha> obterHistorico() {
+        carregarHistoricoDoArquivo();
+        return new ArrayList<>(historicoBatalhas);
+    }
+
     private Jogador criarJogador(String nome) {
         Scanner scanner = new Scanner(System.in);
-
         List<Pokemon> pokemons = new ArrayList<>();
+
         for (int i = 0; i < 3; i++) {
             System.out.print("Digite o nome do Pokémon " + (i + 1) + " para o jogador " + nome + ": ");
             String nomePokemon = scanner.nextLine().toLowerCase();
@@ -93,16 +127,10 @@ public class BatalhaService {
                 pokemons.add(pokemon);
             } catch (Exception e) {
                 System.out.println("Erro ao buscar Pokémon: " + nomePokemon + ". Tente novamente.");
-                i--; // Repetir a iteração
+                i--; // repete a tentativa
             }
         }
 
         return new Jogador(nome, pokemons);
     }
-
-
-    public List<ResultadoBatalha> obterHistorico() {
-        return new ArrayList<>(historicoBatalhas);
-    }
-
 }

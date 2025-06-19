@@ -1,0 +1,16 @@
+[
+  {
+    "jogador1Nome": "leo",
+    "jogador2Nome": "ana",
+    "vitoriasJogador1": 5,
+    "vitoriasJogador2": 0,
+    "dataBatalha": "2025-06-19T15:53:55.9737948"
+  },
+  {
+    "jogador1Nome": "rods",
+    "jogador2Nome": "leo",
+    "vitoriasJogador1": 5,
+    "vitoriasJogador2": 0,
+    "dataBatalha": "2025-06-19T15:55:36.3478629"
+  }
+]

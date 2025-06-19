@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -25,12 +26,14 @@ public class ResultadoBatalha {
 
     @Override
     public String toString() {
-        return "ResultadoBatalha{" +
-                "jogador1='" + jogador1Nome + '\'' +
-                ", jogador2='" + jogador2Nome + '\'' +
-                ", vitoriasJogador1=" + vitoriasJogador1 +
-                ", vitoriasJogador2=" + vitoriasJogador2 +
-                ", dataBatalha=" + dataBatalha +
-                '}';
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        return "\n=== Resultado da Batalha ===" +
+                "\nJogador 1: " + jogador1Nome +
+                "\nJogador 2: " + jogador2Nome +
+                "\nVitórias de " + jogador1Nome + ": " + vitoriasJogador1 +
+                "\nVitórias de " + jogador2Nome + ": " + vitoriasJogador2 +
+                "\nData da Batalha: " + dataBatalha.format(formatter) +
+                "\n============================\n";
     }
 }
