@@ -49,7 +49,7 @@ Este projeto segue os princípios de **Arquitetura Orientada a Serviços (SOA)**
 - Ao escolher um Pokémon, o sistema consulta a API da Pokédex e adapta os dados recebidos para a classe interna Pokemon através da PokedexAdapter.
 
 ✅ 2. Exposição de Serviço Interno: Histórico de Batalhas
-- Ao final de cada batalha, o resultado é salvo localmente (atualmente em arquivo .txt e planejado para ser armazenado no banco de dados PostgreSQL).
+- Ao final de cada batalha, o resultado é salvo localmente (atualmente em arquivo .json e planejado para ser armazenado no banco de dados PostgreSQL).
 
 - Esse histórico será futuramente acessível por outros módulos do sistema ou clientes externos por meio de uma API REST.
 
